@@ -1,0 +1,185 @@
+[
+    {
+        "name": "The Sun",
+        "id": "1",
+        "top": "yellow",
+        "bottom": "yellow"
+    },
+    {
+        "name": "The Moon",
+        "id": "2",
+        "top": "pale blue",
+        "bottom": "royal blue"
+    },
+    {
+        "name": "Jupiter",
+        "id": "3",
+        "top": "coral",
+        "bottom": "coral"
+    },{
+        "name": "Uranus",
+        "id": "4",
+        "top":"yellow",
+        "bottom": "deep turquoise"
+    },{
+        "name": "Mercury",
+        "id": "5",
+        "top":"green",
+        "bottom": "pale green"
+    },{
+        "name": "Venus",
+        "id": "6",
+        "top":"pink",
+        "bottom": "pink"
+    },{
+        "name": "Neptune",
+        "id": "7",
+        "top":"turquoise",
+        "bottom": "deep turquoise"
+    },{
+        "name": "Saturn",
+        "id": "8",
+        "top":"pale violet",
+        "bottom": "violet"
+    },{
+        "name": "Mars",
+        "id": "9",
+        "top":"red",
+        "bottom": "orange"
+    },{
+        "name": "Wheel of Fortune",
+        "id": "10",
+        "top":"gold",
+        "bottom": "olive"
+    },{
+        "name": "Duality",
+        "id": "11",
+        "top":"deep magenta",
+        "bottom": "clear"
+    },{
+        "name": "Heaven on Earth",
+        "id": "12",
+        "top":"violet",
+        "bottom": "red"
+    },{
+        "name": "Transformation",
+        "id": "13",
+        "top":"dark violet",
+        "bottom": "pale violet"
+    },{
+        "name": "Movement",
+        "id": "14",
+        "top":"pale turquoise",
+        "bottom": "pale turquoise"
+    },{
+        "name": "Magician",
+        "id": "15",
+        "top":"olive",
+        "bottom": "olive"
+    },{
+        "name": "The Tower",
+        "id": "16",
+        "top":"olive",
+        "bottom": "lilac"
+    },{
+        "name": "The Wish",
+        "id": "17",
+        "top":"coral",
+        "bottom": "royal blue"
+    },{
+        "name": "Spiritual and Material Conflict",
+        "id": "18",
+        "top":"red",
+        "bottom": "rose pink"
+    },{
+        "name": "Buddhic Bliss",
+        "id": "19",
+        "top":"pale magenta",
+        "bottom": "gold"
+    },{
+        "name": "Awakening",
+        "id": "20",
+        "top":"magenta",
+        "bottom": "copper"
+    },{
+        "name": "The Key",
+        "id": "21",
+        "top":"gold",
+        "bottom": "yellow"
+    },{
+        "name": "Forgiveness",
+        "id": "22",
+        "top":"deep magenta",
+        "bottom": "pale magenta"
+    },{
+        "name": "Initiation",
+        "id": "23",
+        "top":"royal blue",
+        "bottom": "royal blue"
+    },{
+        "name": "Love, Money & Creativity",
+        "id": "24",
+        "top":"pale magenta",
+        "bottom": "pale olive"
+    },{
+        "name": "Trust",
+        "id": "25",
+        "top":"turquoise",
+        "bottom": "yellow"
+    },{
+        "name": "Partnerships",
+        "id": "26",
+        "top":"magenta",
+        "bottom": "olive"
+    },{
+        "name": "Harvest",
+        "id": "27",
+        "top":"orange",
+        "bottom": "gold"
+    },{
+        "name": "New beginnings",
+        "id": "28",
+        "top":"yellow",
+        "bottom": "pale turquoise"
+    },{
+        "name": "Grace Under Pressure",
+        "id": "29",
+        "top":"deep turquoise",
+        "bottom": "deep magenta"
+    },{
+        "name": "Creativity",
+        "id": "30",
+        "top":"turquoise",
+        "bottom": "turquoise"
+    },{
+        "name": "The Hermit",
+        "id": "31",
+        "top":"pale green",
+        "bottom": "deep green"
+    },{
+        "name": "Communication",
+        "id": "32",
+        "top":"royal blue",
+        "bottom": "olive"
+    },{
+        "name": "Love & Magic",
+        "id": "33",
+        "top":"pale pink",
+        "bottom": "rose pink"
+    },{
+        "name": "The Whale",
+        "id": "34",
+        "top":"deep turquoise",
+        "bottom": "blue"
+    },{
+        "name": "The Inner Guide",
+        "id": "35",
+        "top":"blue lilac",
+        "bottom": "pale green"
+    },{
+        "name": "The Gateway",
+        "id": "36",
+        "top":"blue lilac",
+        "bottom": "blue lilac"
+    }
+]

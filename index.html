@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Mirrors</title>
+    <style>
+        :root {
+            --bottle-width: 3em;
+        }
+
+        html,
+        body {
+            margin: 0;
+        }
+
+        body {
+            transition: all 2s ease-in-out;
+        }
+
+        #bottles {
+            margin-top: 60vh;
+            width: 100%;
+            height: 40vh;
+            top: 60vh;
+            padding: 1rem;
+            background: rgba(240, 240, 240, 0.4);
+        }
+
+        .bottle-holder {
+            position: relative;
+            display: inline-block;
+            width: var(--bottle-width);
+            height: var(--bottle-width);
+            padding: 0rem;
+        }
+
+        .bottle {
+            display: inline-block;
+            width: var(--bottle-width);
+            height: var(--bottle-width);
+            padding: 0rem;
+            cursor: move;
+        }
+
+        .bottle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        path {
+            transition: fill 0.1s ease;
+        }
+
+        .playing {
+            position: absolute;
+        }
+
+        .docked {
+            transition: transform 1s ease-in-out;
+            transform: translate(0px, 0px);
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <section id="bottles">
+
+    </section>
+    <button id="reset">Reset</button>
+</body>
+<script>
+
+    let colours;
+    let bottleJson;
+
+    async function getColoursAndBottles() {
+        let bresponse = await fetch('./bottles.json');
+        let cresponse = await fetch('./colours.json')
+
+        if (bresponse.ok && cresponse.ok) { // if HTTP-status is 200-299
+            // get the response body (the method explained below)
+            bottleJson = await bresponse.json();
+            colours = await cresponse.json();
+            startSession()
+        } else {
+            alert("HTTP-Error: " + response.status);
+        }
+    }
+
+
+
+    function makeDraggable(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        elmnt.onmousedown = dragMouseDown;
+        var parent = elmnt.parentElement;
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            getOut(elmnt)
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:            
+            //elmnt.style.transform = `translate(${parent.offsetTop - pos2}px, ${parent.offsetLeft - pos1}px)`;
+            //console.log(elmnt.offsetTop)
+            //console.log(e.clientY)
+            let cursorOffsetTop = e.clientY - parent.offsetTop
+            let cursorOffsetLeft = e.clientX - parent.offsetLeft
+            //console.log(elmnt.offsetTop - pos2 + 'px',elmnt.offsetLeft - pos1 + 'px')
+            //console.log(parent.offsetTop - pos2 + 'px',parent.offsetLeft - pos1 + 'px')
+            //elmnt.style.top = cursorOffsetTop - pos2 + 'px'
+            //elmnt.style.left = cursorOffsetLeft - pos1 + 'px'
+            elmnt.style.transform = `translate(${cursorOffsetLeft - pos1}px, ${cursorOffsetTop - pos2}px)`;
+        }
+
+        function closeDragElement() {
+            /* stop moving when mouse button is released:*/
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+    function getOut(bottle) {
+        bottle.classList.add('playing')
+        bottle.classList.remove('docked')
+    }
+
+    function putBack(bottle) {
+        bottle.classList.remove('playing')
+        bottle.style.transform = 'translate(0px, 0px)'
+        bottle.classList.add('docked')
+    }
+
+    function createEl(bottleJson) {
+        let topColors = colours[bottleJson.top].top.map(color => color)
+        let bottomColors = colours[bottleJson.bottom].bottom.map(color => color)
+        return `
+        <div class="bottle-holder">
+        <div class="bottle docked"  draggable="true">
+            <svg id="class" xmlns="http://www.w3.org/2000/svg" width="113.6" height="153.42" viewBox="0 0 322.03 434.89">
+                <path data-colours="${topColors}" class="top" d="M160.48,159.81A161.06,161.06,0,0,0,3,287.06H317.93A161.06,161.06,0,0,0,160.48,159.81Z" style="fill:  ${colours[bottleJson.top].top[0]}"/>
+                <path data-colours="${bottomColors}" class="bottom" d="M3.56,287A161.17,161.17,0,0,0,43.75,431.11c.51.54,1,1.12,1.55,1.62,7.26,6.48,64.09-3.71,115-3.78,49.94-.08,110,9.49,116,4.2.38-.33.7-.72,1.05-1.09a161.15,161.15,0,0,0,41.1-145Z" style="fill: ${colours[bottleJson.bottom].bottom[0]}"/>
+                <rect class="lid" x="123.3" width="74.32" height="164.13" style="fill: #bfbfbf"/>
+</svg>
+
+</div>
+</div>
+    `;
+    };
+
+    function animateColours(el) {
+
+        setTimeout(() => {
+
+            let colors = el.getAttribute('data-colours').split(',')
+            let start;
+            let counter = 0;
+            console.log(colors)
+            let step = (timestamp) => {
+
+                if (start === undefined)
+                    start = timestamp;
+                const elapsed = timestamp - start
+
+ 
+                //if (elapsed % 2 === 0) {
+                    el.style.fill = colors[counter];
+                    if (counter === 8) {
+                        counter = 0;
+                    } else {
+                        counter++;
+                    }
+               // }
+
+                window.requestAnimationFrame(step);
+            }
+
+
+            window.requestAnimationFrame(step);
+
+        }, Math.floor(Math.random() * 1000) + 1)
+
+
+    }
+
+    function startSession() {
+        var bottlesContainer = document.querySelector('#bottles')
+        const bottlesCount = 85
+        for (let i = 0; i < bottleJson.length; i++) {
+            const el = createEl(bottleJson[i])
+            bottlesContainer.innerHTML += el
+        }
+        let bottles = document.querySelectorAll('.bottle')
+        bottles.forEach(makeDraggable)
+
+
+        document.querySelectorAll('.bottom').forEach(animateColours)
+        document.querySelectorAll('.top').forEach(animateColours)
+        document.querySelector('#reset').addEventListener('click', (evt) => {
+            evt.preventDefault()
+            bottles.forEach(putBack)
+        })
+    }
+
+    getColoursAndBottles();
+
+</script>
+
+</html>
