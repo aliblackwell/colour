@@ -61,6 +61,12 @@
       height: 100%;
     }
 
+    .bottle img {
+      position: absolute;
+      width: 100%;
+      height: auto;
+    }
+
     path {
       transition: fill 0.1s ease;
     }
@@ -161,6 +167,16 @@
     bottle.classList.add('docked')
   }
 
+  function createImg(bottle) {
+    return `
+      <div class="bottle-holder">
+        <div class="bottle docked" draggable="true">
+          <img src="/cutouts/bot${bottle.id}_cutout.png" />
+        </div>
+      </div>
+    `
+  }
+
   function createEl(bottleJson) {
     let bottomColours = colours[bottleJson.bottom].bottom
     // stop-opacity="${(i-8) * -0.1}"
@@ -226,7 +242,7 @@
     var bottlesContainer = document.querySelector('#bottles')
     const bottlesCount = 85
     for (let i = 0; i < bottleJson.length; i++) {
-      const el = createEl(bottleJson[i])
+      const el = createImg(bottleJson[i])
       bottlesContainer.innerHTML += el
     }
     let bottles = document.querySelectorAll('.bottle')
